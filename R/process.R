@@ -46,7 +46,11 @@ cvap_process_file <- function(path, year, out_dir, moe = TRUE, csv = FALSE) {
   }
 
   if (nrow(wide) > 1) {
+    if (year == 2020) {
+      wide <- wide %>% dplyr::mutate(GEOID = stringr::str_sub(GEOID, 3))
+    }
     wide <- wide %>% dplyr::mutate(state = stringr::str_sub(GEOID, 1, 2))
+
   } else {
     fs::dir_create(out_dir, 'nation')
 
