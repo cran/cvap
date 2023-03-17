@@ -1,7 +1,7 @@
 Package: cvap
 Title: Citizen Voting Age Population
-Version: 0.1.1
-Date: 2022-04-15
+Version: 0.1.3
+Date: 2023-03-15
 Authors@R: 
     person(given = "Christopher T.",
            family = "Kenny",
@@ -12,19 +12,19 @@ Description: Works with the Citizen Voting Age Population special tabulation fro
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
-Imports: censable, cli, dplyr, fs, magrittr, purrr, readr, rlang,
-        stringr, tidyr
+RoxygenNote: 7.2.3
+Imports: censable, cli, dplyr, fs, magrittr, readr, rlang, stringr,
+        tidyr
 URL: https://github.com/christopherkenny/cvap,
-        https://www.christophertkenny.com/cvap/
+        https://christophertkenny.com/cvap/
 BugReports: https://github.com/christopherkenny/cvap/issues
 Depends: R (>= 2.10)
 Suggests: testthat (>= 3.0.0)
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-04-16 01:48:26 UTC; chris
+Packaged: 2023-03-17 20:59:55 UTC; chris
 Author: Christopher T. Kenny [aut, cre]
     (<https://orcid.org/0000-0002-9386-6860>)
 Maintainer: Christopher T. Kenny <christopherkenny@fas.harvard.edu>
 Repository: CRAN
-Date/Publication: 2022-04-16 07:02:29 UTC
+Date/Publication: 2023-03-17 21:10:02 UTC
