@@ -1,7 +1,7 @@
-c3650e7f318e7961caa40d63285faa0f *DESCRIPTION
+d38d8ba14e497bb68157610ca141202a *DESCRIPTION
 90dc41df95dd276daeaefc7a09f7c4f3 *LICENSE
 5ad40541e58c62405b4e5d50d2f06ad2 *NAMESPACE
-365931d97c9c39e8aff7144c4cdcb257 *NEWS.md
+4ec5db1fac12509ed3d14b40835a5235 *NEWS.md
 7b77b6d561c1e1585586d4ba2accf755 *R/cvap-package.R
 1c8a0685a73f1684c1ab97abd94e9e1f *R/data.R
 c7c6e2bd8ba5f7900a24cf6cb8d3e820 *R/distribute.R
@@ -34,4 +34,4 @@ ac576323ab223c944601a59080ba94e0 *man/de_block_group.Rd
 f8b89df61867c79a3b10e2a317302018 *tests/testthat/setup.R
 2bf5391a103e43350eb2cf01a75fc6d7 *tests/testthat/test-distribute.R
 cdecf7cc519d5df7cfdf610ed402a5c8 *tests/testthat/test-get.R
-f275af6185a059ea310a93d416ab3933 *tests/testthat/test-vest_crosswalk.R
+655642f358ab4076ea1b08bed22736be *tests/testthat/test-vest_crosswalk.R
