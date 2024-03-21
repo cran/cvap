@@ -1,5 +1,5 @@
 clean_LNTITLE <- function(data) {
-  data %>% dplyr::mutate(LNTITLE = dplyr::case_when(
+  data |> dplyr::mutate(LNTITLE = dplyr::case_when(
     .data$LNTITLE == 'Total' ~ '',
     .data$LNTITLE == 'Not Hispanic or Latino' ~ 'not_hisp',
     .data$LNTITLE == 'American Indian or Alaska Native Alone' ~ 'aian',
@@ -19,8 +19,8 @@ clean_LNTITLE <- function(data) {
 
 clean_cvap_names <- function(data) {
   noms <- names(data)
-  noms <- noms %>%
-    stringr::str_remove('_EST') %>%
+  noms <- noms |>
+    stringr::str_remove('_EST') |>
     stringr::str_to_lower()
   noms[noms == 'geoid'] <- 'GEOID'
   names(data) <- noms
@@ -34,8 +34,8 @@ validate_year <- function(year) {
     year <- year[1]
   }
 
-  if (year < 2009 || year > 2021) {
-    cli::cli_abort('Only years from 2009 to 2021 supported.')
+  if (year < 2009 || year > 2022) {
+    cli::cli_abort('Only years from 2009 to 2022 supported.')
   }
 
   year

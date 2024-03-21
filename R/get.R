@@ -16,7 +16,7 @@
 #' - 'nation': nation-wide data
 #'
 #' @param state character. The state to get data for or nation for the nation file.
-#' @param year numeric. Year for the data in 2009 to 2021.
+#' @param year numeric. Year for the data in 2009 to 2022.
 #' @param geography character. Level of geography. Default is 'block group'. See Details.
 #' @param out_file file to save downloaded rds to
 #' @param moe Include margin of error? Default is FALSE.
@@ -29,7 +29,7 @@
 #'
 #' @examples
 #' cvap_get('DE')
-cvap_get <- function(state, year = 2021, geography = 'block group', out_file = NULL, moe = FALSE, clean = TRUE) {
+cvap_get <- function(state, year = 2022, geography = 'block group', out_file = NULL, moe = FALSE, clean = TRUE) {
   base_url <- 'https://github.com/christopherkenny/cvap_data/raw/main/'
   year <- validate_year(year)
   geography <- validate_geography(geography, year)
@@ -51,17 +51,17 @@ cvap_get <- function(state, year = 2021, geography = 'block group', out_file = N
   out <- readr::read_rds(out_file)
 
   if (!moe) {
-    out <- out %>% dplyr::select(-dplyr::contains('_moe'))
+    out <- out |> dplyr::select(-dplyr::contains('_moe'))
   }
 
   if (clean) {
-    out <- out %>%
+    out <- out |>
       dplyr::select(dplyr::any_of(c(
         'GEOID', 'cvap', 'cvap_white', 'cvap_black',
         'cvap_hisp', 'cvap_asian', 'cvap_aian', 'cvap_nhpi', 'cvap_two'
-      ))) %>%
-      dplyr::rowwise() %>%
-      dplyr::mutate(cvap_other = max(cvap - cvap_white - cvap_black - cvap_hisp - cvap_asian - cvap_aian - cvap_nhpi - cvap_two, 0)) %>%
+      ))) |>
+      dplyr::rowwise() |>
+      dplyr::mutate(cvap_other = max(cvap - cvap_white - cvap_black - cvap_hisp - cvap_asian - cvap_aian - cvap_nhpi - cvap_two, 0)) |>
       dplyr::ungroup()
     readr::write_rds(out, out_file, 'xz')
   }

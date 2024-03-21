@@ -32,12 +32,12 @@
 #'
 cvap_distribute <- function(cvap, block, wts = 'pop', include_implied = TRUE) {
   match.arg(wts, choices = c('pop', 'vap'))
-  block <- block %>%
+  block <- block |>
     dplyr::mutate(bg_GEOID = stringr::str_sub(string = .data$GEOID, 1, 12))
 
   matches <- match(block$bg_GEOID, cvap$GEOID)
-  noms <- cvap %>%
-    dplyr::select(dplyr::starts_with('cvap')) %>%
+  noms <- cvap |>
+    dplyr::select(dplyr::starts_with('cvap')) |>
     names()
   b_cvap <- lapply(
     X = noms,
@@ -48,20 +48,20 @@ cvap_distribute <- function(cvap, block, wts = 'pop', include_implied = TRUE) {
       }
       estimate_down(wts = block[[what]], value = cvap[[name]], group = matches)
     }
-  ) %>%
-    do.call(what = 'cbind') %>%
-    `colnames<-`(value = noms) %>%
+  ) |>
+    do.call(what = 'cbind') |>
+    `colnames<-`(value = noms) |>
     dplyr::as_tibble()
 
-  out <- block %>%
+  out <- block |>
     dplyr::bind_cols(
       b_cvap
     )
 
   if (include_implied) {
-    out$impl_cvap <- out %>%
-      dplyr::select(dplyr::starts_with('cvap_')) %>%
-      as.matrix() %>%
+    out$impl_cvap <- out |>
+      dplyr::select(dplyr::starts_with('cvap_')) |>
+      as.matrix() |>
       rowSums()
   }
 
@@ -74,7 +74,7 @@ cvap_distribute <- function(cvap, block, wts = 'pop', include_implied = TRUE) {
 #' Calls `cvap_distribute` within.
 #'
 #' @param state character. The state to get data for or nation for the nation file.
-#' @param year numeric. Year for the data in 2009 to 2021.
+#' @param year numeric. Year for the data in 2009 to 2022.
 #' @param clean Should variable names be standardized? Default is TRUE.
 #' @param wts 'pop' (default) or 'vap' for the group to distribute by.
 #' @param include_implied logical if a column for the implied total (`impl_cvap`) should be included. Default is `TRUE`
@@ -90,7 +90,7 @@ cvap_distribute <- function(cvap, block, wts = 'pop', include_implied = TRUE) {
 #' cvap_distribute_censable('DE', 2019)
 #' }
 #'
-cvap_distribute_censable <- function(state, year = 2021, clean = TRUE, wts = 'pop', include_implied = TRUE) {
+cvap_distribute_censable <- function(state, year = 2022, clean = TRUE, wts = 'pop', include_implied = TRUE) {
   state <- censable::match_abb(state)
   b_year <- year - (year %% 10)
 
